@@ -5,10 +5,10 @@ import StockList from '@/components/stocks/StockList.vue'
 <template>
   <main>
     <!-- Hero section -->
-    <div class="bg-gray-100 border-b">
+    <div>
       <div class="container max-w-full px-6 py-8">
         <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Stock Insights</h1>
-        <p class="mt-3 max-w-2xl text-xl text-gray-500">
+        <p class="mt-3 max-w-2xl text-xl">
           Track stock recommendations, ratings, and price targets from top brokerages
         </p>
       </div>
@@ -16,7 +16,7 @@ import StockList from '@/components/stocks/StockList.vue'
 
     <!-- Main content -->
     <div class="container max-w-full px-6 py-8">
-      <div class="bg-white rounded-lg shadow">
+      <div class="rounded-lg shadow">
         <StockList />
       </div>
     </div>
