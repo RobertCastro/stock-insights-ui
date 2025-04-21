@@ -1,7 +1,7 @@
 import type { Stock, StocksResponse, StockFilters } from '@/types/stock'
 
 // Base URL de la API
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
 
 /**
  * Opciones por defecto para las peticiones fetch
@@ -19,12 +19,10 @@ const defaultOptions: RequestInit = {
  */
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
-    // Intentar obtener el mensaje de error del servidor
     try {
       const errorData = await response.json()
       throw new Error(errorData.message || `Error ${response.status}: ${response.statusText}`)
     } catch (e) {
-      // Si no se puede parsear la respuesta como JSON, lanzar error genérico
       throw new Error(`Error ${response.status}: ${response.statusText}`)
     }
   }
