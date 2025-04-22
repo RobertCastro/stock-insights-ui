@@ -1,0 +1,4 @@
+project_id    = "tu-proyecto-id"
+region        = "us-central1"
+repository_id = "vue-stocks-repo"
+service_name  = "vue-stocks-app"
