@@ -17,6 +17,12 @@ export const useStocksStore = defineStore('stocks', () => {
   const filters = ref<StockFilters>({
     page: 1,
     page_size: 10,
+    ticker: '',
+    brokerage: '',
+    rating: '',
+    action: '',
+    order_by: '',
+    sort: 'ASC',
   })
 
   // Getters
@@ -57,9 +63,39 @@ export const useStocksStore = defineStore('stocks', () => {
     filters.value = {
       ...filters.value,
       ...newFilters,
+      page:
+        newFilters.page !== undefined
+          ? newFilters.page
+          : newFilters.ticker !== undefined ||
+              newFilters.brokerage !== undefined ||
+              newFilters.rating !== undefined ||
+              newFilters.action !== undefined ||
+              newFilters.order_by !== undefined ||
+              newFilters.sort !== undefined
+            ? 1
+            : filters.value.page,
     }
 
     await fetchStocks()
+  }
+
+  /**
+   * Obtiene los detalles de un stock específico
+   * @param ticker Ticker del stock a consultar
+   */
+  async function getStockByTicker(ticker: string) {
+    isLoading.value = true
+    error.value = null
+
+    try {
+      const stockData = await stocksApi.getStockByTicker(ticker)
+      return stockData
+    } catch (err) {
+      error.value = err instanceof Error ? err.message : `Error al obtener el stock ${ticker}`
+      return null
+    } finally {
+      isLoading.value = false
+    }
   }
 
   return {
@@ -81,5 +117,6 @@ export const useStocksStore = defineStore('stocks', () => {
     // Acciones
     fetchStocks,
     updateFilters,
+    getStockByTicker,
   }
 })

@@ -25,6 +25,17 @@ export interface StocksResponse {
 }
 
 /**
+ * Acciones posibles de casas de bolsa sobre stocks
+ */
+export enum StockAction {
+  UPGRADED = 'upgraded by',
+  DOWNGRADED = 'downgraded by',
+  REITERATED = 'reiterated by',
+  INITIATED = 'initiated by',
+  MAINTAINED = 'maintained by',
+}
+
+/**
  * Parámetros para filtrar y ordenar stocks
  */
 export interface StockFilters {
@@ -33,6 +44,7 @@ export interface StockFilters {
   ticker?: string
   brokerage?: string
   rating?: string
+  action?: string
   order_by?: string
   sort?: 'ASC' | 'DESC'
 }

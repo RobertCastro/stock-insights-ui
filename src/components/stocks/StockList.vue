@@ -36,6 +36,15 @@
       </div>
     </div>
 
+    <!-- Filtros avanzados -->
+    <StockFiltersPanel
+      :initial-filters="stocksStore.filters"
+      @update:filters="handleFiltersUpdate"
+    />
+
+    <!-- Filtros activos -->
+    <ActiveFilters :filters="stocksStore.filters" @update:filters="handleFiltersUpdate" />
+
     <!-- Estado de carga -->
     <div v-if="stocksStore.isLoading" class="bg-white rounded-lg shadow p-6">
       <div class="animate-pulse space-y-4">
@@ -61,7 +70,7 @@
         @click="stocksStore.fetchStocks()"
         class="mt-2 inline-flex items-center px-3 py-1.5 border border-red-300 shadow-sm text-xs font-medium rounded text-red-700 bg-white hover:bg-red-50"
       >
-        Reintentar
+        Retry
       </button>
     </div>
 
@@ -80,8 +89,8 @@
           d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
-      <h3 class="mt-2 text-sm font-medium text-gray-900">No se encontraron resultados</h3>
-      <p class="mt-1 text-sm text-gray-500">Prueba con diferentes criterios de búsqueda.</p>
+      <h3 class="mt-2 text-sm font-medium text-gray-900">No results found</h3>
+      <p class="mt-1 text-sm text-gray-500">Try different search criteria.</p>
     </div>
 
     <!-- Lista de stocks -->
@@ -128,7 +137,11 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="stock in stocksStore.stocks" :key="stock.ticker" class="hover:bg-gray-50">
-            <td class="py-3 px-4 font-medium text-gray-900">{{ stock.ticker }}</td>
+            <td class="py-3 px-4 font-medium text-gray-900">
+              <router-link :to="`/stocks/${stock.ticker}`" class="hover:text-blue-600">
+                {{ stock.ticker }}
+              </router-link>
+            </td>
             <td class="py-3 px-4 text-gray-600">{{ stock.company }}</td>
             <td class="py-3 px-4 text-gray-600">{{ stock.brokerage }}</td>
             <td class="py-3 px-4 text-gray-600">
@@ -159,9 +172,9 @@
     <!-- Paginación mejorada -->
     <div v-if="stocksStore.hasStocks" class="flex justify-between items-center mt-6 text-sm">
       <div class="text-gray-600">
-        Mostrando {{ (stocksStore.currentPage - 1) * stocksStore.itemsPerPage + 1 }} -
+        Showing {{ (stocksStore.currentPage - 1) * stocksStore.itemsPerPage + 1 }} -
         {{ Math.min(stocksStore.currentPage * stocksStore.itemsPerPage, stocksStore.totalStocks) }}
-        de {{ stocksStore.totalStocks }} resultados
+        de {{ stocksStore.totalStocks }} results
       </div>
       <div class="flex items-center space-x-2">
         <button
@@ -169,17 +182,17 @@
           :disabled="stocksStore.currentPage <= 1"
           class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Anterior
+          Previous
         </button>
         <span class="px-3 py-2 bg-gray-100 rounded-md">
-          Página {{ stocksStore.currentPage }} de {{ stocksStore.totalPages }}
+          Page {{ stocksStore.currentPage }} de {{ stocksStore.totalPages }}
         </span>
         <button
           @click="stocksStore.updateFilters({ page: stocksStore.currentPage + 1 })"
           :disabled="stocksStore.currentPage >= stocksStore.totalPages"
           class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Siguiente
+          Next
         </button>
       </div>
     </div>
@@ -187,8 +200,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useStocksStore } from '@/stores/stocks'
+import type { StockFilters } from '@/types/stock'
+import StockFiltersPanel from './StockFilters.vue'
+import ActiveFilters from './ActiveFilters.vue'
 
 const stocksStore = useStocksStore()
 
@@ -200,7 +216,21 @@ let searchTimeout: number | null = null
 // Cargar los stocks
 onMounted(() => {
   stocksStore.fetchStocks()
+
+  if (stocksStore.filters.ticker) {
+    searchQuery.value = stocksStore.filters.ticker
+  }
 })
+
+watch(
+  () => stocksStore.filters.ticker,
+  (newTicker) => {
+    // Solo actualizar si es diferente para evitar bucles
+    if (newTicker !== searchQuery.value) {
+      searchQuery.value = newTicker || ''
+    }
+  },
+)
 
 function handleSearch() {
   if (searchTimeout) {
@@ -213,6 +243,10 @@ function handleSearch() {
       page: 1,
     })
   }, 300) as unknown as number
+}
+
+function handleFiltersUpdate(newFilters: Partial<StockFilters>) {
+  stocksStore.updateFilters(newFilters)
 }
 
 function formatAction(action: string): string {
