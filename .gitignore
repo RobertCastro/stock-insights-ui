@@ -29,3 +29,5 @@ coverage
 
 *.tsbuildinfo
 terraform.tfvars
+.terraform
+.terraform.lock.hcl

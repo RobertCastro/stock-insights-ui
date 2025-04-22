@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'main'
-      - 'feat/*'
 
 jobs:
   deploy:
@@ -16,6 +15,7 @@ jobs:
       REPO_NAME: vue-stocks-repo
       SERVICE: vue-stocks-app
       IMAGE_NAME: vue-stocks-app
+      RUNTIME_SERVICE_ACCOUNT: vue-stocks-runtime@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com
 
     steps:
       - name: Checkout repo
@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Build Vue app
-        run: npm run build
+        run: npm run build-only
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
@@ -55,4 +55,5 @@ jobs:
             --image ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
             --region ${{ env.REGION }} \
             --platform managed \
+            --service-account vue-stocks-runtime@${{ env.PROJECT_ID }}.iam.gserviceaccount.com \
             --allow-unauthenticated
