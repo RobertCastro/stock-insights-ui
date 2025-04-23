@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import StockList from '@/components/stocks/StockList.vue'
+import RecommendationsTicker from '@/components/recommendations/RecommendationsTicker.vue'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -7,14 +9,36 @@ import StockList from '@/components/stocks/StockList.vue'
     <!-- Hero section -->
     <div>
       <div class="container max-w-full px-6 py-8">
-        <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Stock Insights</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Stock insights</h1>
         <p class="mt-3 max-w-2xl text-xl">
           Track stock recommendations, ratings, and price targets from top brokerages
         </p>
       </div>
     </div>
 
-    <!-- Main content -->
+    <!-- Ticker de recomendaciones -->
+    <div class="bg-gray-50 border-t border-b border-gray-200">
+      <div class="container max-w-full px-2">
+        <div class="flex items-center h-10">
+          <div class="bg-gray-100 h-full flex items-center px-4 border-r border-gray-200">
+            <span class="text-xs font-bold text-gray-700 whitespace-nowrap mr-2">TOP RECOS</span>
+          </div>
+          <div class="flex-grow">
+            <RecommendationsTicker />
+          </div>
+          <div class="flex items-center h-full px-4 border-l border-gray-200">
+            <RouterLink
+              to="/recommendations"
+              class="text-xs text-blue-600 hover:text-blue-800 whitespace-nowrap"
+            >
+              See all →
+            </RouterLink>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Stocks -->
     <div class="container max-w-full px-6 py-8">
       <div class="rounded-lg shadow">
         <StockList />
