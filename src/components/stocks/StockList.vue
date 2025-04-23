@@ -2,7 +2,7 @@
   <div class="stock-list-container p-4">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
       <div>
-        <h2 class="text-xl font-bold text-gray-800">Stock Recommendations</h2>
+        <h2 class="text-xl font-bold text-gray-800">Stock recommendations</h2>
         <p class="text-sm text-gray-500 mt-1">
           Latest ratings and price targets from top brokerages
         </p>
@@ -13,7 +13,7 @@
         <div class="relative">
           <input
             type="text"
-            placeholder="Buscar por ticker..."
+            placeholder="Search by ticker..."
             v-model="searchQuery"
             @input="handleSearch"
             class="pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 w-full md:w-64"
@@ -137,8 +137,11 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="stock in stocksStore.stocks" :key="stock.ticker" class="hover:bg-gray-50">
-            <td class="py-3 px-4 font-medium text-gray-900">
-              <router-link :to="`/stocks/${stock.ticker}`" class="hover:text-blue-600">
+            <td class="py-3 px-4 font-medium text-blue-700">
+              <router-link
+                :to="`/stocks/${stock.ticker}`"
+                class="hover:text-blue-600 hover:underline"
+              >
                 {{ stock.ticker }}
               </router-link>
             </td>

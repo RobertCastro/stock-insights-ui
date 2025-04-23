@@ -90,4 +90,21 @@ export const stocksApi = {
 
     return handleResponse<Stock>(response)
   },
+
+  /**
+   * Obtiene las recomendaciones de inversión
+   * @param limit Límite de recomendaciones a obtener (opcional)
+   * @returns Promesa con los datos de recomendaciones
+   */
+  async getRecommendations(limit?: number): Promise<RecommendationsResponse> {
+    const params = limit ? { limit } : undefined
+    const url = buildUrl('/recommendations', params)
+
+    const response = await fetch(url, {
+      ...defaultOptions,
+      method: 'GET',
+    })
+
+    return handleResponse<RecommendationsResponse>(response)
+  },
 }

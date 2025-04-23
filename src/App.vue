@@ -18,6 +18,12 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink to="/stocks" class="text-black hover:text-emerald-600 font-medium mx-4">
             Stocks
           </RouterLink>
+          <RouterLink
+            to="/recommendations"
+            class="text-black hover:text-emerald-600 font-medium mx-4"
+          >
+            Recommendations
+          </RouterLink>
           <RouterLink to="/about" class="text-black hover:text-emerald-600 font-medium mx-4">
             About
           </RouterLink>

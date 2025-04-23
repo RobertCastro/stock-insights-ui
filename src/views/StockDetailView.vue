@@ -120,7 +120,7 @@
       </div>
 
       <div class="p-6">
-        <h2 class="text-lg font-semibold mb-4">Latest Recommendation</h2>
+        <h2 class="text-lg font-semibold mb-4">Latest recommendation</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="bg-gray-50 p-4 rounded-lg">

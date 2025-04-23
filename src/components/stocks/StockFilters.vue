@@ -39,7 +39,7 @@
             @change="applyFilters"
             class="border border-input mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
           >
-            <option value="">Todos</option>
+            <option value="">All</option>
             <option v-for="brokerage in brokerages" :key="brokerage" :value="brokerage">
               {{ brokerage }}
             </option>
@@ -55,7 +55,7 @@
             @change="applyFilters"
             class="border border-input mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
           >
-            <option value="">Todos</option>
+            <option value="">All</option>
             <option v-for="rating in ratings" :key="rating" :value="rating">
               {{ rating }}
             </option>
@@ -71,7 +71,7 @@
             @change="applyFilters"
             class="border border-input mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
           >
-            <option value="">Todas</option>
+            <option value="">All</option>
             <option value="upgraded by">Upgraded</option>
             <option value="downgraded by">Downgraded</option>
             <option value="reiterated by">Reiterated</option>
