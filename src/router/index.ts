@@ -21,6 +21,11 @@ const router = createRouter({
       props: true,
     },
     {
+      path: '/recommendations',
+      name: 'recommendations',
+      component: () => import('../views/RecommendationsView.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import('../views/AboutView.vue'),
