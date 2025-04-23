@@ -83,7 +83,7 @@
 <script setup lang="ts">
 import type { Recommendation } from '@/types/recommendation'
 
-const props = defineProps<{
+defineProps<{
   recommendation: Recommendation
 }>()
 

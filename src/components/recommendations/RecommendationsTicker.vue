@@ -1,5 +1,5 @@
 <template>
-  <div class="recommendations-ticker overflow-hidden">
+  <div class="recommendations-ticker w-full overflow-hidden">
     <!-- Estado de carga -->
     <div v-if="isLoading" class="flex space-x-4 animate-pulse overflow-x-auto py-2 px-4">
       <div
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Carrusel de tickers -->
-    <div v-else ref="tickerContainer" class="ticker-container">
+    <div v-else ref="tickerContainer" class="ticker-container w-full overflow-hidden">
       <div
         class="ticker-wrapper flex space-x-6 py-2 px-4 animate-ticker"
         :style="{ animation: `ticker ${animationDuration}s linear infinite` }"
@@ -65,7 +65,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { stocksApi } from '@/services/api'
-import type { RecommendationsResponse, Recommendation } from '@/types/recommendation'
+import type { RecommendationsResponse } from '@/types/recommendation'
 
 const router = useRouter()
 
@@ -183,10 +183,12 @@ function getPriceClass(from: string, to: string): string {
 .animate-ticker {
   animation: ticker 30s linear infinite;
   will-change: transform;
+  display: inline-flex;
 }
 
 .ticker-container {
   overflow: hidden;
   white-space: nowrap;
+  max-width: 100%;
 }
 </style>

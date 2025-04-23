@@ -17,19 +17,21 @@ import { RouterLink } from 'vue-router'
     </div>
 
     <!-- Ticker de recomendaciones -->
-    <div class="bg-gray-50 border-t border-b border-gray-200">
-      <div class="container max-w-full px-2">
+    <div class="bg-gray-50 border-t border-b border-gray-200 w-full overflow-hidden">
+      <div class="container max-w-full px-6">
         <div class="flex items-center h-10">
-          <div class="bg-gray-100 h-full flex items-center px-4 border-r border-gray-200">
-            <span class="text-xs font-bold text-gray-700 whitespace-nowrap mr-2">TOP RECOS</span>
+          <div
+            class="bg-gray-100 h-full flex items-center px-4 border-r border-gray-200 flex-shrink-0"
+          >
+            <span class="text-xs font-bold text-gray-700 whitespace-nowrap">TOP RECOS</span>
           </div>
-          <div class="flex-grow">
+          <div class="flex-grow overflow-hidden">
             <RecommendationsTicker />
           </div>
-          <div class="flex items-center h-full px-4 border-l border-gray-200">
+          <div class="flex items-center h-full px-4 border-l border-gray-200 flex-shrink-0">
             <RouterLink
               to="/recommendations"
-              class="text-xs text-blue-600 hover:text-blue-800 whitespace-nowrap"
+              class="text-xs font-bold text-blue-600 hover:text-blue-800 whitespace-nowrap"
             >
               See all →
             </RouterLink>
