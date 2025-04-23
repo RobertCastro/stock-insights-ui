@@ -3,6 +3,11 @@ import type { Stock, StocksResponse, StockFilters } from '@/types/stock'
 // Base URL de la API
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
 
+// Log para depuración (solo en desarrollo)
+if (import.meta.env.DEV) {
+  console.log('API_BASE_URL:', API_BASE_URL)
+}
+
 /**
  * Opciones por defecto para las peticiones fetch
  */
