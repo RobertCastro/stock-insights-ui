@@ -2,14 +2,11 @@
 
 Una aplicación Vue 3 desarrollada para mostrar recomendaciones e información sobre acciones, desplegada en Google Cloud Platform.
 
-![Stock Insights UI](screenshots/app-screenshot.png)
-
 ## Tabla de Contenidos
 
 - [Características](#características)
 - [Stack Tecnológico](#stack-tecnológico)
 - [Configuración de Desarrollo Local](#configuración-de-desarrollo-local)
-- [Estructura del Proyecto](#estructura-del-proyecto)
 - [Integración con API](#integración-con-api)
 - [Configuración de Infraestructura con Terraform](#configuración-de-infraestructura-con-terraform)
 - [Despliegue en GCP](#despliegue-en-gcp)
@@ -231,14 +228,11 @@ También puedes desplegar manualmente:
 
 ## Capturas de Pantalla
 
-![Vista de Dashboard](screenshots/dashboard.png)
-_Dashboard mostrando recomendaciones de acciones_
+![image](https://github.com/user-attachments/assets/f8307abc-a758-44ab-a406-bac936604045)
 
-![Vista Detallada de Acciones](screenshots/detail-view.png)
-_Vista de análisis detallado de acciones_
 
-![Vista Móvil](screenshots/mobile-view.png)
-_Interfaz responsiva para móvil_
+![image](https://github.com/user-attachments/assets/c3762ad3-a05a-4510-840c-d1f1b88ee7a3)
+
 
 ## Contribuciones
 
