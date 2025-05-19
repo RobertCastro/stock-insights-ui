@@ -233,6 +233,9 @@ También puedes desplegar manualmente:
 
 ![image](https://github.com/user-attachments/assets/c3762ad3-a05a-4510-840c-d1f1b88ee7a3)
 
+![image](https://github.com/user-attachments/assets/46055d16-0f09-4f22-9e93-6c4de1655190)
+
+
 
 ## Contribuciones
 
